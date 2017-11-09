@@ -11,3 +11,6 @@ The rest of the setup is for eclipse users. Copy the images in the Images file i
 If you are not using eclipse, why?
 
 NOTES: The current state of NFC's source is MOSTLY POOR. 99% of the code is not commented. The plan is to get the new methods and the original methods in modified classes fully commented, and also state what has changed in the classes. There are still a lot of methods that have terrible names like "func_98409128" from MCP 43 not having fully decompiled Beta. Hopefully we can improve this with time too.
+
+You can get in touch with the community on our offical [forms](http://newfrontiercraft.net/thread/51/front-page)
+and our [Discord server](https://discord.gg/RqG8mzr)
