@@ -1,8 +1,8 @@
 # New-Frontier-Craft
 A new adventure in old Minecraft.
 
-Git client build: 1.8.6 Dev. 01 (UNSTABLE) (NO SERVER YET)
-
+Git client build: 1.8.5_01 (RELEASE) (STABLE) (Recently reverted)
+NO SERVER UPLOADED
 
 Setup: Obtain [MCP](https://minecraft.gamepedia.com/Programs_and_editors/Mod_Coder_Pack) 43 and a Beta 1.7.3 minecraft.jar and decompile the jar. Then download this into your file containing MCP files. Locate and/or download Mojang's most recent authlib. I can find it in my minecraft directory\libraries\com\mojang\authlib\(Most recent version here). Copy that into the lib folder with your MCP files. I cannot distribute that for legal reasons.
 
