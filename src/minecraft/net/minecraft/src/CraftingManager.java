@@ -67,16 +67,16 @@ public class CraftingManager
         addRecipe(new ItemStack(Block.tnt, 1), new Object[] {
             "XX", "XX", Character.valueOf('X'), NFC.dynamite
         });
-        addRecipe(new ItemStack(Block.stairSingle, 4, 3), new Object[] {
+        addRecipe(new ItemStack(Block.stairSingle, 6, 3), new Object[] {
             "###", Character.valueOf('#'), Block.cobblestone
         });
-        addRecipe(new ItemStack(Block.stairSingle, 4, 0), new Object[] {
+        addRecipe(new ItemStack(Block.stairSingle, 6, 0), new Object[] {
             "###", Character.valueOf('#'), Block.stone
         });
-        addRecipe(new ItemStack(Block.stairSingle, 4, 1), new Object[] {
+        addRecipe(new ItemStack(Block.stairSingle, 6, 1), new Object[] {
             "###", Character.valueOf('#'), Block.sandStone
         });
-        addRecipe(new ItemStack(Block.stairSingle, 4, 2), new Object[] {
+        addRecipe(new ItemStack(Block.stairSingle, 6, 2), new Object[] {
             "###", Character.valueOf('#'), Block.planks
         });
         addRecipe(new ItemStack(Block.ladder, 3), new Object[] {
@@ -195,7 +195,7 @@ public class CraftingManager
         addRecipe(new ItemStack(Block.dispenser, 1), new Object[] {
             "###", "#X#", "#R#", Character.valueOf('#'), Block.cobblestone, Character.valueOf('X'), Item.bow, Character.valueOf('R'), Item.redstone
         });
-        addRecipe(new ItemStack(Block.pistonBase, 1), new Object[] {
+        addRecipe(new ItemStack(Block.pistonBase, 2), new Object[] {
             "TTT", "#X#", "#R#", Character.valueOf('#'), Block.cobblestone, Character.valueOf('X'), NFC.aluminum, Character.valueOf('R'), Item.redstone, Character.valueOf('T'), 
             Block.planks
         });

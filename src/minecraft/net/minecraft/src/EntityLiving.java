@@ -508,7 +508,23 @@ public abstract class EntityLiving extends Entity {
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(boundingBox.minY);
 		int k = MathHelper.floor_double(posZ);
-		return worldObj.getBlockId(i, j, k) == Block.ladder.blockID;
+		if(worldObj.getBlockId(i, j, k) == Block.ladder.blockID) return true;
+		
+		int id;
+		id = worldObj.getBlockId(i+1, j, k);
+		if(id == NFC.Scaffold.blockID) return true;
+		if(id == Block.ladder.blockID && worldObj.getBlockMetadata(i+1, j, k) == 5) return true;
+		id = worldObj.getBlockId(i-1, j, k);
+		if(id == NFC.Scaffold.blockID) return true;
+		if(id == Block.ladder.blockID && worldObj.getBlockMetadata(i-1, j, k) == 4) return true;
+		id = worldObj.getBlockId(i, j, k+1);
+		if(id == NFC.Scaffold.blockID) return true;
+		if(id == Block.ladder.blockID && worldObj.getBlockMetadata(i, j, k+1) == 3) return true;
+		id = worldObj.getBlockId(i, j, k-1);
+		if(id == NFC.Scaffold.blockID) return true;
+		if(id == Block.ladder.blockID && worldObj.getBlockMetadata(i, j, k-1) == 2) return true;
+		
+		return false;
 	}
 
 	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {

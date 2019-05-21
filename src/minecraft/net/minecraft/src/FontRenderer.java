@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 public class FontRenderer
 {
 
-    public FontRenderer(GameSettings gamesettings, String s, RenderEngine renderengine)
+    public FontRenderer(GameSettings gamesettings, TexturePackBase tex, RenderEngine renderengine)
     {
         charWidth = new int[256];
         fontTextureName = 0;
@@ -29,13 +29,14 @@ public class FontRenderer
         BufferedImage bufferedimage;
         try
         {
-            bufferedimage = ImageIO.read((net.minecraft.src.RenderEngine.class).getResourceAsStream(s));
+            bufferedimage = renderengine.readTextureImage(tex.getResourceAsStream("/font/default.png"));
         }
         catch(IOException ioexception)
         {
             throw new RuntimeException(ioexception);
         }
         int i = bufferedimage.getWidth();
+        res = i/16;
         int j = bufferedimage.getHeight();
         int ai[] = new int[i * j];
         bufferedimage.getRGB(0, 0, i, j, ai, 0, i);
@@ -43,18 +44,18 @@ public class FontRenderer
         {
             int l = k % 16;
             int k1 = k / 16;
-            int j2 = 7;
+            int j2 = (i/16)-1;
             do
             {
                 if(j2 < 0)
                 {
                     break;
                 }
-                int i3 = l * 8 + j2;
+                int i3 = l * (i/16) + j2;
                 boolean flag = true;
-                for(int l3 = 0; l3 < 8 && flag; l3++)
+                for(int l3 = 0; l3 < (i/16) && flag; l3++)
                 {
-                    int i4 = (k1 * 8 + l3) * i;
+                    int i4 = (k1 * (i/16) + l3) * i;
                     int k4 = ai[i3 + i4] & 0xff;
                     if(k4 > 0)
                     {
@@ -70,7 +71,7 @@ public class FontRenderer
             } while(true);
             if(k == 32)
             {
-                j2 = 2;
+                j2 = (i/64) + (i/128) - 1;
             }
             charWidth[k] = j2 + 2;
         }
@@ -82,15 +83,15 @@ public class FontRenderer
         {
             GL11.glNewList(fontDisplayLists + i1, 4864 /*GL_COMPILE*/);
             tessellator.startDrawingQuads();
-            int l1 = (i1 % 16) * 8;
-            int k2 = (i1 / 16) * 8;
-            float f = 7.99F;
+            int l1 = (i1 % 16) * (i/16);
+            int k2 = (i1 / 16) * (i/16);
+            float f = (float)(i/16);
             float f1 = 0.0F;
             float f2 = 0.0F;
-            tessellator.addVertexWithUV(0.0D, 0.0F + f, 0.0D, (float)l1 / 128F + f1, ((float)k2 + f) / 128F + f2);
-            tessellator.addVertexWithUV(0.0F + f, 0.0F + f, 0.0D, ((float)l1 + f) / 128F + f1, ((float)k2 + f) / 128F + f2);
-            tessellator.addVertexWithUV(0.0F + f, 0.0D, 0.0D, ((float)l1 + f) / 128F + f1, (float)k2 / 128F + f2);
-            tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, (float)l1 / 128F + f1, (float)k2 / 128F + f2);
+            tessellator.addVertexWithUV(0.0D, 0.0F + f, 0.0D, (float)l1 / (float)(i) + f1, ((float)k2 + f) / (float)(i) + f2);
+            tessellator.addVertexWithUV(0.0F + f, 0.0F + f, 0.0D, ((float)l1 + f) / (float)(i) + f1, ((float)k2 + f) / (float)(i) + f2);
+            tessellator.addVertexWithUV(0.0F + f, 0.0D, 0.0D, ((float)l1 + f) / (float)(i) + f1, (float)k2 / (float)(i) + f2);
+            tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, (float)l1 / (float)(i) + f1, (float)k2 / (float)(i) + f2);
             tessellator.draw();
             GL11.glTranslatef(charWidth[i1], 0.0F, 0.0F);
             GL11.glEndList();
@@ -165,6 +166,7 @@ public class FontRenderer
         buffer.clear();
         GL11.glPushMatrix();
         GL11.glTranslatef(i, j, 0.0F);
+        GL11.glScaled(8/((float)res), 8/((float)res), 8/((float)res));
         for(int i1 = 0; i1 < s.length(); i1++)
         {
             for(; s.length() > i1 + 1 && s.charAt(i1) == '\247'; i1 += 2)
@@ -225,7 +227,7 @@ public class FontRenderer
             }
         }
 
-        return i;
+        return i/(res/8);
     }
 
     public void func_27278_a(String s, int i, int j, int k, int l)
@@ -453,6 +455,7 @@ public class FontRenderer
 	}
 
     private int charWidth[];
+    private int res;
     public int fontTextureName;
     private int fontDisplayLists;
     private IntBuffer buffer;

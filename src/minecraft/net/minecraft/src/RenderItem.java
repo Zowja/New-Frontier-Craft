@@ -245,7 +245,7 @@ public class RenderItem extends Render {
 		float f2 = 0.00390625F;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(i + 0, j + j1, f, (float) (k + 0) * f1,
+		tessellator.addVertexWithUV(i - 0, j + j1, f, (float) (k + 0) * f1,
 				(float) (l + j1) * f2);
 		tessellator.addVertexWithUV(i + i1, j + j1, f, (float) (k + i1) * f1,
 				(float) (l + j1) * f2);

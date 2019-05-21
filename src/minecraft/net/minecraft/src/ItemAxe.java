@@ -19,6 +19,6 @@ public class ItemAxe extends ItemTool {
 		blocksEffectiveAgainst = (new Block[] { Block.planks, Block.bookShelf,
 				Block.wood, Block.chest, Block.doorWood, Block.pressurePlatePlanks, Block.stairCompactPlanks, 
 				Block.fence, Block.trapdoor, Block.jukebox, Block.signPost, Block.signWall, Block.musicBlock,
-				Block.ladder});
+				Block.ladder, Block.workbench});
 	}
 }

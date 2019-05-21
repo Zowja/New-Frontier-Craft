@@ -24,7 +24,7 @@ public enum EnumToolMaterial {
 	STEEL("STEEL", 4, 4, 700, 8F, 10), TUNGSTEN("TUNGSTEN", 4, 4, 1100, 6F, 10), 
 	TITANIUM("TITANIUM", 4, 4, 350, 14F, 10),
 	
-	GEM("GEM", 4, 4, 8400, 10F, 20),
+	GEM("GEM", 4, 4, 1000, 10F, 20),
 
 	DIAMOND("DIAMOND", 5, 5, 2000, 10F, 20), OSMIUM("OSMIUM", 5, 5, 5000, 5F, 20);
 	/*

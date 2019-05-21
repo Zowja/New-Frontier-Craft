@@ -155,20 +155,26 @@ public class EntityRenderer
         }
     }
 
-    private float getFOVModifier(float f)
+    private float getFOVModifier(float f, boolean fov)
     {
         EntityLiving entityliving = mc.renderViewEntity;
         float f1 = 70F;
         if(entityliving.isInsideOfMaterial(Material.water))
         {
             f1 = 60F;
+        } else if (entityliving.isInsideOfMaterial(Material.oil)){
+        	f1 = 55F;
         }
         if(entityliving.health <= 0)
         {
             float f2 = (float)entityliving.deathTime + f;
             f1 /= (1.0F - 500F / (f2 + 500F)) * 2.0F + 1.0F;
         }
-        return f1 + field_22221_y + (field_22222_x - field_22221_y) * f;
+        if(isScoping){
+    		return 10F;
+        }
+        float additionalMod = fov ? (this.mc.gameSettings.getOptionFloatValue(EnumOptions.FOV)*30) : 0F;
+        return f1 + field_22221_y + (field_22222_x - field_22221_y) * f + additionalMod;
     }
 
     private void hurtCameraEffect(float f)
@@ -313,10 +319,10 @@ public class EntityRenderer
         {
             GL11.glTranslatef((float)cameraYaw, (float)(-cameraPitch), 0.0F);
             GL11.glScaled(cameraZoom, cameraZoom, 1.0D);
-            GLU.gluPerspective(getFOVModifier(f), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
+            GLU.gluPerspective(getFOVModifier(f, true), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
         } else
         {
-            GLU.gluPerspective(getFOVModifier(f), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
+            GLU.gluPerspective(getFOVModifier(f, true), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
         }
         GL11.glMatrixMode(5888 /*GL_MODELVIEW0_ARB*/);
         GL11.glLoadIdentity();
@@ -343,6 +349,23 @@ public class EntityRenderer
 
     private void func_4135_b(float f, int i)
     {
+    	GL11.glMatrixMode(5889 /*GL_PROJECTION*/);
+        GL11.glLoadIdentity();
+        float f1 = 0.07F;
+        if(mc.gameSettings.anaglyph)
+        {
+            GL11.glTranslatef((float)(-(i * 2 - 1)) * f1, 0.0F, 0.0F);
+        }
+        if(cameraZoom != 1.0D)
+        {
+            GL11.glTranslatef((float)cameraYaw, (float)(-cameraPitch), 0.0F);
+            GL11.glScaled(cameraZoom, cameraZoom, 1.0D);
+            GLU.gluPerspective(getFOVModifier(f, false), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
+        } else
+        {
+            GLU.gluPerspective(getFOVModifier(f, false), (float)mc.displayWidth / (float)mc.displayHeight, 0.05F, farPlaneDistance * 2.0F);
+        }
+        GL11.glMatrixMode(5888 /*GL_MODELVIEW0_ARB*/);
         GL11.glLoadIdentity();
         if(mc.gameSettings.anaglyph)
         {
@@ -448,6 +471,10 @@ public class EntityRenderer
             if(!mc.gameSettings.hideGUI || mc.currentScreen != null)
             {
                 mc.ingameGUI.renderGameOverlay(f, mc.currentScreen != null, k, i1);
+            }
+            else
+            {
+            	mc.ingameGUI.renderTelescopeBypass(f);
             }
         } else
         {
@@ -1024,8 +1051,17 @@ public class EntityRenderer
         fogColorBuffer.flip();
         return fogColorBuffer;
     }
+    
+    public static void setZoom(boolean isZooming){
+    	isScoping = isZooming;
+    }
+    
+    public static boolean isZooming(){
+    	return isScoping;
+    }
 
     public static boolean field_28135_a = false;
+    private static boolean isScoping = false;
     public static int anaglyphField;
     private Minecraft mc;
     private float farPlaneDistance;

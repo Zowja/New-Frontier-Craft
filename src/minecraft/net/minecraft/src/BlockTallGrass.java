@@ -50,6 +50,7 @@ public class BlockTallGrass extends BlockFlower {
 	}
 
 	public int idDropped(int i, Random random) {
+		System.out.println(i);
 		if (random.nextInt(8) == 0) {
 			return Item.seeds.shiftedIndex;
 		} else {
@@ -62,9 +63,12 @@ public class BlockTallGrass extends BlockFlower {
 		if (!world.multiplayerWorld
 				&& entityplayer.getCurrentEquippedItem() != null
 				&& entityplayer.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex) {
-			entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(
-					NFC.tallgrassitem, 1, (l<3)?l+3:l));
+			if(world.getBlockId(i, j+1, k) == Block.waterMoving.blockID){
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(704, 1, 0));
+			} else {
+				entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(NFC.tallgrassitem, 1, (l<3)?l+3:l));
+			}
 		} else {
 			super.harvestBlock(world, entityplayer, i, j, k, l);
 		}

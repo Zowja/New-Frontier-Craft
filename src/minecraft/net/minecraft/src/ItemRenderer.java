@@ -40,15 +40,22 @@ public class ItemRenderer {
 					itemstack.getItemDamage(),
 					entityliving.getEntityBrightness(1.0F));
 		} else {
+			int res = 16;
 			if (itemstack.itemID < 256) {
 				GL11.glBindTexture(3553 /* GL_TEXTURE_2D */,
 						mc.renderEngine.getTexture("/terrain.png"));
 			} else if (itemstack.itemID > 584 && itemstack.itemID < 768) {
+				int tex = mc.renderEngine.getTexture("/NFC/items.png");
 				GL11.glBindTexture(3553 /* GL_TEXTURE_2D */,
-						mc.renderEngine.getTexture("/NFC/items.png"));
+						tex);
+				res = (Integer) mc.renderEngine.textureSizeIdMap.get(tex);
+				res /= 16;
 			} else {
+				int tex = mc.renderEngine.getTexture("/gui/items.png");
 				GL11.glBindTexture(3553 /* GL_TEXTURE_2D */,
-						mc.renderEngine.getTexture("/gui/items.png"));
+						tex);
+				res = (Integer) mc.renderEngine.textureSizeIdMap.get(tex);
+				res /= 16;
 			}
 			Tessellator tessellator = Tessellator.instance;
 			int i = entityliving.getItemIcon(itemstack);
@@ -83,9 +90,9 @@ public class ItemRenderer {
 			tessellator.draw();
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(-1F, 0.0F, 0.0F);
-			for (int j = 0; j < 16; j++) {
-				float f9 = (float) j / 16F;
-				float f13 = (f1 + (f - f1) * f9) - 0.001953125F;
+			for (int j = 0; j < res; j++) {
+				float f9 = (float) j / (float) res;
+				float f13 = (f1 + (f - f1) * f9) - (1f / (float) (res * 32));
 				float f17 = f4 * f9;
 				tessellator.addVertexWithUV(f17, 0.0D, 0.0F - f8, f13, f3);
 				tessellator.addVertexWithUV(f17, 0.0D, 0.0D, f13, f3);
@@ -96,10 +103,10 @@ public class ItemRenderer {
 			tessellator.draw();
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(1.0F, 0.0F, 0.0F);
-			for (int k = 0; k < 16; k++) {
-				float f10 = (float) k / 16F;
-				float f14 = (f1 + (f - f1) * f10) - 0.001953125F;
-				float f18 = f4 * f10 + 0.0625F;
+			for (int k = 0; k < res; k++) {
+				float f10 = (float) k / (float) res;
+				float f14 = (f1 + (f - f1) * f10) - (1f / (float) (res * 32));
+				float f18 = f4 * f10 + (1f / (float) res);
 				tessellator.addVertexWithUV(f18, 1.0D, 0.0F - f8, f14, f2);
 				tessellator.addVertexWithUV(f18, 1.0D, 0.0D, f14, f2);
 				tessellator.addVertexWithUV(f18, 0.0D, 0.0D, f14, f3);
@@ -109,10 +116,10 @@ public class ItemRenderer {
 			tessellator.draw();
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0.0F, 1.0F, 0.0F);
-			for (int l = 0; l < 16; l++) {
-				float f11 = (float) l / 16F;
-				float f15 = (f3 + (f2 - f3) * f11) - 0.001953125F;
-				float f19 = f4 * f11 + 0.0625F;
+			for (int l = 0; l < res; l++) {
+				float f11 = (float) l / (float) res;
+				float f15 = (f3 + (f2 - f3) * f11) - (1f / (float) (res * 32));
+				float f19 = f4 * f11 + (1f / (float) res);
 				tessellator.addVertexWithUV(0.0D, f19, 0.0D, f1, f15);
 				tessellator.addVertexWithUV(f4, f19, 0.0D, f, f15);
 				tessellator.addVertexWithUV(f4, f19, 0.0F - f8, f, f15);
@@ -122,9 +129,9 @@ public class ItemRenderer {
 			tessellator.draw();
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0.0F, -1F, 0.0F);
-			for (int i1 = 0; i1 < 16; i1++) {
-				float f12 = (float) i1 / 16F;
-				float f16 = (f3 + (f2 - f3) * f12) - 0.001953125F;
+			for (int i1 = 0; i1 < res; i1++) {
+				float f12 = (float) i1 / (float) res;
+				float f16 = (f3 + (f2 - f3) * f12) - (1f / (float) (res * 32));
 				float f20 = f4 * f12;
 				tessellator.addVertexWithUV(f4, f20, 0.0D, f, f16);
 				tessellator.addVertexWithUV(0.0D, f20, 0.0D, f1, f16);

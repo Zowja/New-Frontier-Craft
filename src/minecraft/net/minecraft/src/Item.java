@@ -359,9 +359,9 @@ public class Item {
 			12, 3).setItemName("Map");
 	public static ItemShears shears = (ItemShears) (new ItemShears(103))
 			.setIconCoord(13, 5).setItemName("Shears");
-	public static Item record13 = (new ItemRecord(2000, "13")).setIconCoord(13,
+	public static Item record13 = (new ItemRecord(2000, "%13")).setIconCoord(13,
 			3).setItemName("Music Disc");
-	public static Item recordCat = (new ItemRecord(2001, "cat")).setIconCoord(
+	public static Item recordCat = (new ItemRecord(2001, "%cat")).setIconCoord(
 			14, 2).setItemName("Music Disc");
 	public final int shiftedIndex;
 	protected int maxStackSize;

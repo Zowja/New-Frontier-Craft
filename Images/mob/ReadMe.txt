@@ -1,0 +1,1 @@
+You might be wondering why all of the mobs' pngs are included. That is because in order to line up the skins and rendering to modern standards, the bottom of the head needed to be flipped around. So all of these images have the bottom of the head flipped so they look correct in-game.

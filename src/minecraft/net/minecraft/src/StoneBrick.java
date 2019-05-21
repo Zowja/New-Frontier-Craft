@@ -17,7 +17,7 @@ public class StoneBrick extends Block {
 	}
 
 	public int idDropped(int i, Random random) {
-		return Block.stone.blockID;
+		return NFC.stoneBlock.blockID;
 	}
 
 	public String Version() {

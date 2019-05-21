@@ -21,7 +21,7 @@ public class ItemBow extends Item {
 			EntityPlayer entityplayer) {
 		if (entityplayer.inventory
 				.consumeInventoryItem(Item.arrow.shiftedIndex)) {
-			world.playSoundAtEntity(entityplayer, "random.oldbow", 1.0F,
+			world.playSoundAtEntity(entityplayer, "random.bow", 1.0F,
 					1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.multiplayerWorld) {
 				world.entityJoinedWorld(new EntityArrow(world, entityplayer));

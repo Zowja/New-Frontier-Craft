@@ -4,6 +4,14 @@ public class NFC {
 
 	public static void addRecipies(CraftingManager craftmng) {
 
+		Item.itemsList[EWStep.blockID] = (new ItemSlab(
+				EWStep.blockID - 256)).setItemName("Stone Slab");
+		Item.itemsList[NSStep.blockID] = (new ItemSlab(
+				NSStep.blockID - 256)).setItemName("Stone Slab");
+		
+		// For derp crafting
+		//craftmng.addRecipe(new ItemStack(Block.tallGrass, 2, 2), new Object[] { "X", ('X'), Block.dirt });
+		
 		for (int i = 0; i < 256; i++) {
 			if (Block.blocksList[i] != null && Item.itemsList[i] == null) {
 				Item.itemsList[i] = new ItemBlock(i - 256);
@@ -11,9 +19,31 @@ public class NFC {
 			}
 		}
 		
+		craftmng.addRecipe(new ItemStack(Scaffold, 10), new Object[] {
+	            "###", "XXX", "XXX", Character.valueOf('#'), Block.planks, Character.valueOf('X'), Block.ladder
+	        });
 		
-		craftmng.addRecipe(new ItemStack(Block.tnt, 1), new Object[] { "X",
-				('X'), Block.dirt });
+		craftmng.addRecipe(new ItemStack(Block.stairSingle, 6, 4), new Object[] {
+	            "###", Character.valueOf('#'), Block.brick
+	        });
+		craftmng.addRecipe(new ItemStack(BrickStairs, 4), new Object[] {
+	            "#  ", "## ", "###", Character.valueOf('#'), Block.brick
+	        });
+		craftmng.addRecipe(new ItemStack(SandstoneStairs, 4), new Object[] {
+	            "#  ", "## ", "###", Character.valueOf('#'), Block.sandStone
+	        });
+		craftmng.addRecipe(new ItemStack(StoneStairs, 4), new Object[] {
+	            "#  ", "## ", "###", Character.valueOf('#'), stoneBlock
+	        });
+		
+		craftmng.addShapelessRecipe(new ItemStack(Block.stairDouble.blockID, 1, 0),
+				new Object[] { new ItemStack(Block.stairSingle, 1, 0),
+						new ItemStack(Block.stairSingle, 1, 0) });
+		
+		craftmng.addRecipe(new ItemStack(Telescope, 1), new Object[] { "XO ", "OH ", "  O",
+				('X'), Block.glass, ('H'), Item.leather, ('O'), brass });
+		craftmng.addRecipe(new ItemStack(Wrench, 1), new Object[] { " O ", "OH ", "  O",
+				('H'), Item.leather, ('O'), Item.ingotIron });
 		
 		craftmng.addRecipe(new ItemStack(BrickOvenIdle, 1), new Object[] { "XXX", "X X", "XXX",
 			('X'), Block.brick });
@@ -21,7 +51,7 @@ public class NFC {
 		craftmng.addRecipe(new ItemStack(Block.torchWood, 8), new Object[] { "X", "O",
 			('X'), anthracite, ('O'), Item.stick  });
 
-		craftmng.addShapelessRecipe(new ItemStack(WritableBook, 1),
+		craftmng.addShapelessRecipe(new ItemStack(writableBook, 1),
 				new Object[] { new ItemStack(Item.book, 1),
 						new ItemStack(Item.feather, 1),
 						new ItemStack(Item.dyePowder, 1, 0) });
@@ -39,7 +69,12 @@ public class NFC {
 				"X", "X", ('X'), stoneBlock });
 		craftmng.addRecipe(new ItemStack(stoneBlockSmall, 9), new Object[] {
 				"XXX", "XXX", "XXX", ('X'), stoneBlock });
-
+		craftmng.addShapelessRecipe(new ItemStack(stoneBricks, 3),
+				new Object[] { new ItemStack(stoneBlock, 1), new ItemStack(stoneBlock, 1), new ItemStack(stoneBlock, 1) });
+		craftmng.addRecipe(new ItemStack(platedStone, 4), new Object[] {
+	            "##", "##", Character.valueOf('#'), Block.stone
+	        });
+		
 		craftmng.addShapelessRecipe(new ItemStack(Block.glass, 2, 1),
 				new Object[] { Block.glass, Block.planks });
 		craftmng.addRecipe(new ItemStack(Block.glass, 4, 2), new Object[] { " X ",
@@ -47,12 +82,12 @@ public class NFC {
 		craftmng.addRecipe(new ItemStack(Block.glass, 3, 3), new Object[] { "XOX",
 				('X'), Block.planks, ('O'), Block.glass });
 
-		craftmng.addRecipe(new ItemStack(EditableBook, 1), new Object[] { "XO",
-				Character.valueOf('X'), EditableBook, Character.valueOf('O'),
-				WritableBook });
-		craftmng.addRecipe(new ItemStack(EditableBook, 1), new Object[] { "OX",
-				Character.valueOf('X'), EditableBook, Character.valueOf('O'),
-				WritableBook });
+		craftmng.addRecipe(new ItemStack(writtenBook, 1), new Object[] { "XO",
+				Character.valueOf('X'), writtenBook, Character.valueOf('O'),
+				writableBook });
+		craftmng.addRecipe(new ItemStack(writtenBook, 1), new Object[] { "OX",
+				Character.valueOf('X'), writtenBook, Character.valueOf('O'),
+				writableBook });
 
 		craftmng.addShapelessRecipe(new ItemStack(coloredseeds, 1),
 				new Object[] { Item.seeds, new ItemStack(Item.dyePowder, 1, 1),
@@ -64,7 +99,7 @@ public class NFC {
 						new ItemStack(Item.dyePowder, 1, 11), });
 
 		craftmng.addRecipe(new ItemStack(recorddroopylikesyourface, 1),
-				new Object[] { " X ", "XOX", " X ", Character.valueOf('X'),
+				new Object[] { "XXX", "XOX", "XXX", Character.valueOf('X'),
 						Block.obsidian, Character.valueOf('O'),
 						sapphire });
 
@@ -93,7 +128,7 @@ public class NFC {
 				"XX", ('X'), emerald });
 		craftmng.addRecipe(new ItemStack(leadblock, 1), new Object[] { "XX",
 				"XX", ('X'), lead });
-		craftmng.addRecipe(new ItemStack(magnititeblock, 1), new Object[] {
+		craftmng.addRecipe(new ItemStack(magnetiteblock, 1), new Object[] {
 				"XX", "XX", ('X'), magnet });
 		craftmng.addRecipe(new ItemStack(nickelblock, 1), new Object[] { "XX",
 				"XX", ('X'), nickel });
@@ -137,15 +172,15 @@ public class NFC {
 		craftmng.addRecipe(new ItemStack(copperhelmet, 1), new Object[] {
 				"XXX", "X X", ('X'), copper });
 		craftmng.addRecipe(new ItemStack(emeraldhelmet, 1), new Object[] {
-				"XXX", "X X", ('X'), copper });
+				"XXX", "X X", ('X'), emerald });
 		craftmng.addRecipe(new ItemStack(nickelhelmet, 1), new Object[] {
 				"XXX", "X X", ('X'), nickel });
 		craftmng.addRecipe(new ItemStack(platinumhelmet, 1), new Object[] {
 				"XXX", "X X", ('X'), platinum });
 		craftmng.addRecipe(new ItemStack(rubyhelmet, 1), new Object[] {
-				"XXX", "X X", ('X'), copper });
+				"XXX", "X X", ('X'), ruby });
 		craftmng.addRecipe(new ItemStack(sapphirehelmet, 1), new Object[] {
-				"XXX", "X X", ('X'), copper });
+				"XXX", "X X", ('X'), sapphire });
 		craftmng.addRecipe(new ItemStack(siliconhelmet, 1), new Object[] {
 				"XXX", "X X", ('X'), silicon });
 		craftmng.addRecipe(new ItemStack(silverhelmet, 1), new Object[] {
@@ -338,6 +373,8 @@ public class NFC {
 				bronzeblock });
 		craftmng.addRecipe(new ItemStack(steel, 4), new Object[] { "X", ('X'),
 				steelblock });
+		craftmng.addRecipe(new ItemStack(uranium, 4), new Object[] { "X", ('X'),
+				uraniumblock });
 
 		craftmng.addRecipe(new ItemStack(aluminumpick, 1), new Object[] {
 				"XXX", " O ", " O ", ('O'), Item.stick, ('X'), aluminum });
@@ -624,7 +661,13 @@ public class NFC {
 			.setHardness(3F).setResistance(3F).setStepSound(Block.soundGravelFootstep).setBlockName("Pebble");
 	public static final Block AlphaGrass = (new BlockGrass(97))
 			.setHardness(1.2F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");
-
+	public static final Block EWStep = (new BlockStepEW(101)).setHardness(1.2F)
+			.setResistance(10F).setStepSound(Block.soundStoneFootstep)
+			.setBlockName("Stone Slab");
+	public static final Block NSStep = (new BlockStepNS(102)).setHardness(1.2F)
+			.setResistance(10F).setStepSound(Block.soundStoneFootstep)
+			.setBlockName("Stone Slab");
+	
 	public static final Block stoneBlock = (new StoneBrick(150, 30))
 			.setHardness(1F).setResistance(10F).setBlockName("Stone Brick");
 	public static final Block stoneBlockoffxy = (new StoneBrick(151, 77))
@@ -637,9 +680,17 @@ public class NFC {
 			.setHardness(1F).setResistance(10F).setBlockName("Stone Brick");
 	public static final Block stoneBricks = (new StoneBrick(228, 196))
 			.setHardness(1F).setResistance(10F).setBlockName("Stone Brick");
+	public static final Block platedStone = (new Block(100, 6, Material.rock))
+			.setHardness(1F).setResistance(10F).setBlockName("Plated Stone");
+
+	public static final Block BrickStairs = (new BlockStairs(103, Block.brick)).setBlockName("Brick Stairs").disableNeighborNotifyOnMetadataChange();
+	public static final Block SandstoneStairs = (new BlockStairs(104, Block.sandStone)).setBlockName("Sandstone Stairs").disableNeighborNotifyOnMetadataChange();
+	public static final Block StoneStairs = (new BlockStairs(105, stoneBricks)).setBlockName("Stone Stairs").disableNeighborNotifyOnMetadataChange();
+	
+	public static final Block Scaffold = (new BlockScaffold(106, Material.wood)).setHardness(0.2F).setBlockName("Scaffolding");
 
 	public static final Block aluminumore = (new BlockOre(154, 139))
-			.setHardness(3F).setResistance(500F).setBlockName("Aluminum  Ore");
+			.setHardness(3F).setResistance(500F).setBlockName("Aluminum Ore");
 	public static final Block copperore = (new BlockOre(155, 186))
 			.setHardness(3F).setResistance(500F).setBlockName("Copper Ore");
 	public static final Block tinore = (new BlockOre(156, 168))
@@ -654,8 +705,8 @@ public class NFC {
 			.setHardness(4F).setResistance(500F).setBlockName("Cobalt Ore");
 	public static final Block tungstenore = (new BlockOre(161, 155))
 			.setHardness(6F).setResistance(500F).setBlockName("Tungsten Ore");
-	public static final Block magnititeore = (new BlockOre(162, 184))
-			.setHardness(4F).setResistance(500F).setBlockName("Magnitite Ore");
+	public static final Block magnetiteore = (new BlockOre(162, 184))
+			.setHardness(4F).setResistance(500F).setBlockName("Magnetite Ore");
 	public static final Block silverore = (new BlockOre(163, 167))
 			.setHardness(3.5F).setResistance(500F).setBlockName("Silver Ore");
 	public static final Block leadore = (new BlockOre(164, 185))
@@ -713,10 +764,10 @@ public class NFC {
 			.setHardness(3.5F).setResistance(80F)
 			.setStepSound(Block.soundMetalFootstep)
 			.setBlockName("Tungsten Block");
-	public static final Block magnititeblock = (new BlockOreStorage(185, 189))
+	public static final Block magnetiteblock = (new BlockOreStorage(185, 189))
 			.setHardness(3F).setResistance(40F)
 			.setStepSound(Block.soundMetalFootstep)
-			.setBlockName("Magnitite Block");
+			.setBlockName("Magnetic Block");
 	public static final Block silverblock = (new BlockOreStorage(186, 175))
 			.setHardness(2.5F).setResistance(20F)
 			.setStepSound(Block.soundMetalFootstep)
@@ -767,8 +818,6 @@ public class NFC {
 	public static final Block steelblock = (new BlockOreStorage(199, 159))
 			.setHardness(3.5F).setResistance(80F)
 			.setStepSound(Block.soundMetalFootstep).setBlockName("Steel Block");
-	
-	//ITEM IDS 193-197 EMPTY
 
 	public static final Item aluminum = (new Item(200)).setIconCoord(8, 11)
 			.setItemName("Aluminum Ingot");
@@ -1233,7 +1282,7 @@ public class NFC {
 	public static final Item steelchestplate = (new ItemArmor(368, 4, 17, 1))
 			.setIconCoord(14, 1).setItemName("Steel Chestplate");
 	public static final Item osmiumchestplate = (new ItemArmor(442, 5, 22, 1))
-			.setIconCoord(15, 5).setItemName("Osmium Helmet");
+			.setIconCoord(15, 5).setItemName("Osmium Chestplate");
 
 	public static final Item aluminumleggings = (new ItemArmor(369, 1, 5, 2))
 			.setIconCoord(0, 2).setItemName("Aluminum Leggings");
@@ -1276,7 +1325,7 @@ public class NFC {
 	public static final Item steelleggings = (new ItemArmor(398, 4, 17, 2))
 			.setIconCoord(14, 2).setItemName("Steel Leggings");
 	public static final Item osmiumleggings = (new ItemArmor(443, 5, 22, 2))
-			.setIconCoord(15, 5).setItemName("Osmium Leggings");
+			.setIconCoord(15, 6).setItemName("Osmium Leggings");
 
 	public static final Item aluminumboots = (new ItemArmor(399, 1, 5, 3))
 			.setIconCoord(0, 3).setItemName("Aluminum Boots");
@@ -1319,7 +1368,7 @@ public class NFC {
 	public static final Item steelboots = (new ItemArmor(418, 4, 17, 3))
 			.setIconCoord(14, 3).setItemName("Steel Boots");
 	public static final Item osmiumboots = (new ItemArmor(444, 5, 22, 3))
-			.setIconCoord(15, 5).setItemName("Osmium Boots");
+			.setIconCoord(15, 7).setItemName("Osmium Boots");
 
 	public static final Item cookedegg = (new ItemFood(214, 4, false))
 			.setItemName("Cooked Egg").setIconCoord(11, 5);
@@ -1336,21 +1385,25 @@ public class NFC {
 			.setIconCoord(4, 5).setItemName("Cheese");
 
 
-	public static final Item record26 = (new ItemRecord(422, "26")
+	public static final Item record26 = (new ItemRecord(422, "c418 - 26")
 			.setIconCoord(5, 4).setItemName("Music Disc"));
 	public static final Item recordilackanemotion = (new ItemRecord(423,
-			"i lack an emotion").setIconCoord(6, 4).setItemName("Music Disc"));
+			"c418 - i lack an emotion").setIconCoord(6, 4).setItemName("Music Disc"));
 	public static final Item recordinberlinpeopleactdifferently = (new ItemRecord(
-			424, "in berlin people act differently").setIconCoord(7, 4)
+			424, "c418 - in berlin people act differently").setIconCoord(7, 4)
 			.setItemName("Music Disc"));
-	public static final Item recordpleasedo = (new ItemRecord(425, "please do")
+	public static final Item recordpleasedo = (new ItemRecord(425, "c418 - please do")
 			.setIconCoord(8, 4).setItemName("Music Disc"));
 	public static final Item recorddroopylikesyourface = (new ItemRecord(426,
-			"droopy likes your face").setIconCoord(9, 4)
+			"c418 - droopy likes your face").setIconCoord(9, 4)
 			.setItemName("Music Disc"));
 	public static final Item recordchant = (new ItemRecord(433,
-			"chant").setIconCoord(5, 5)
+			"c418 - chant").setIconCoord(5, 5)
 			.setItemName("Music Disc"));
+	public static final Item recordseaweed = (new ItemRecord(448,
+			"snuppeluppen - new frontier").setIconCoord(6, 5)
+			.setItemName("Music Disc"));
+	
 	public static final Item coloredseeds = (new ItemSeeds(427, 98))
 			.setIconCoord(11, 4);
 	public static final Item fakecobbleitem1 = (new Item(428).setIconCoord(10,
@@ -1379,25 +1432,32 @@ public class NFC {
 	static 
     {
         NFCblocksEffectiveAgainst = (new Block[] {
+        		Block.mobSpawner, Block.doorSteel,
+        			BrickOvenActive, BrickOvenIdle,
         		  aluminumore,  anthraciteore,  bismuthore,  boronore,  osmiumore,
-                  chromeore,  cobaltore,  copperore,  emeraldore,  leadore,  magnititeore,  nickelore,  platinumore,  rubyore,  sapphireore,
+                  chromeore,  cobaltore,  copperore,  emeraldore,  leadore,  magnetiteore,  nickelore,  platinumore,  rubyore,  sapphireore,
                   siliconore,  silverore,  titaniumore, tinore,  tungstenore,  zincore, uranite,
                   aluminumblock,  bismuthblock,  boronblock,
-                  chromeblock,  cobaltblock,  copperblock,  emeraldblock,  leadblock,  magnititeblock,  nickelblock,  platinumblock,  rubyblock,  sapphireblock,
-                  siliconblock,  silverblock,  titaniumblock, tinblock,  tungstenblock,  zincblock, steelblock, bronzeblock, brassblock,
-                  stoneBricks, stoneBlock, stoneBlockoffy, stoneBlockoffx, stoneBlockoffxy
+                  chromeblock,  cobaltblock,  copperblock,  emeraldblock,  leadblock,  magnetiteblock,  nickelblock,  platinumblock,  rubyblock,  sapphireblock,
+                  siliconblock,  silverblock,  titaniumblock, tinblock,  tungstenblock,  zincblock, steelblock, bronzeblock, brassblock, uraniumblock,
+                  stoneBricks, stoneBlock, stoneBlockoffy, stoneBlockoffx, stoneBlockoffxy, NSStep, EWStep, BrickStairs, StoneStairs, SandstoneStairs, 
+                  platedStone, stoneBlockSmall
         });
     }
 
 
-	public static final Item WritableBook = (new ItemWritableBook(431)
+	public static final Item writableBook = (new ItemWritableBook(431)
 			.setIconCoord(12, 4).setItemName("Writable Book"));
-	public static final Item EditableBook = (new ItemEditableBook(432)
-			.setIconCoord(13, 4).setItemName("Writen Book"));
+	public static final Item writtenBook = (new ItemEditableBook(432)
+			.setIconCoord(13, 4).setItemName("Written Book"));
 	
 	public static final Item bucketOil = (new ItemBucket(445, Oil.blockID))
 			.setIconCoord(6, 6).setItemName("Oil Bucket")
 			.setContainerItem(Item.bucketEmpty);
+	
+	public static final Item Telescope = (new ItemTelescope(447)).setIconCoord(6, 7).setItemName("Telescope");
+	
+	public static final Item Wrench = (new ItemWrench(449)).setIconCoord(7, 7).setItemName("Wrench");
 	
 	public static void addSmelting(FurnaceRecipes fr) {
 		fr.addSmelting(Item.egg.shiftedIndex, new ItemStack(cookedegg, 1));
@@ -1409,7 +1469,7 @@ public class NFC {
 		fr.addSmelting(cobaltore.blockID, new ItemStack(cobalt, 1));
 
 		fr.addSmelting(nickelore.blockID, new ItemStack(nickel, 1));
-		fr.addSmelting(magnititeore.blockID, new ItemStack(magnet, 1));
+		fr.addSmelting(magnetiteore.blockID, new ItemStack(magnet, 1));
 		fr.addSmelting(silverore.blockID, new ItemStack(silver, 1));
 		fr.addSmelting(leadore.blockID, new ItemStack(lead, 1));
 		fr.addSmelting(chromeore.blockID, new ItemStack(chrome, 1));
@@ -1421,7 +1481,9 @@ public class NFC {
 		fr.addSmelting(osmiumore.blockID, new ItemStack(osmium, 1));
 	}
 	
-	public static int rawVersion = 18506;
-	public static String Version = "New Frontier Craft 1.8.5_01";
+	//ITEM IDS 193-197 EMPTY
+	
+	public static int rawVersion = 18604;
+	public static String Version = "New Frontier Craft 1.8.6_02";
 
 }

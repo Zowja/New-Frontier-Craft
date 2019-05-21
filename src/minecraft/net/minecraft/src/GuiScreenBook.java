@@ -465,7 +465,7 @@ public class GuiScreenBook extends GuiScreen {
 							timeStamp));
 					this.field_146474_h.setTagInfo("origin", new NBTTagString(
 							"Original"));
-					this.field_146474_h.func_150996_a(NFC.EditableBook);
+					this.field_146474_h.func_150996_a(NFC.writtenBook);
 				}
 
 				try {

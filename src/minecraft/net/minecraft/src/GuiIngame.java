@@ -44,7 +44,16 @@ public class GuiIngame extends Gui {
 		if (Minecraft.isFancyGraphicsEnabled()) {
 			renderVignette(mc.thePlayer.getEntityBrightness(f), k, l);
 		}
-		ItemStack itemstack = mc.thePlayer.inventory.armorItemInSlot(3);
+		ItemStack itemstack = mc.thePlayer.getCurrentEquippedItem();
+		if(EntityRenderer.isZooming()){
+			if(itemstack != null && itemstack.itemID == NFC.Telescope.shiftedIndex){
+				renderTelescopeVision(k, l);
+			}
+			else {
+				EntityRenderer.setZoom(false);
+			}
+		}
+		itemstack = mc.thePlayer.inventory.armorItemInSlot(3);
 		if (!mc.gameSettings.thirdPersonView && itemstack != null
 				&& itemstack.itemID == Block.pumpkin.blockID) {
 			renderPumpkinBlur(k, l);
@@ -425,6 +434,65 @@ public class GuiIngame extends Gui {
 		StringTranslate stringtranslate = StringTranslate.getInstance();
 		String s1 = stringtranslate.translateKey(s);
 		addChatMessage(s1);
+	}
+	
+	public void renderTelescopeBypass(float f){
+		ScaledResolution scaledresolution = new ScaledResolution(
+				mc.gameSettings, mc.displayWidth, mc.displayHeight);
+		int k = scaledresolution.getScaledWidth();
+		int l = scaledresolution.getScaledHeight();
+		mc.entityRenderer.func_905_b();
+		GL11.glEnable(3042 /* GL_BLEND */);
+		ItemStack itemstack = mc.thePlayer.getCurrentEquippedItem();
+		if(EntityRenderer.isZooming()){
+			if(itemstack != null && itemstack.itemID == NFC.Telescope.shiftedIndex){
+				renderTelescopeVision(k, l);
+			}
+			else {
+				EntityRenderer.setZoom(false);
+			}
+		}
+	}
+	
+	private void renderTelescopeVision(int i, int j) {
+		GL11.glDisable(2929 /* GL_DEPTH_TEST */);
+		GL11.glDepthMask(false);
+		GL11.glBlendFunc(770, 771);
+		GL11.glDisable(3008 /* GL_ALPHA_TEST */);
+		GL11.glBindTexture(3553 /* GL_TEXTURE_2D */,
+				mc.renderEngine.getTexture("/NFC/black.png"));
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(0, j, -90D, 0.0D, 1.0D);
+		tessellator.addVertexWithUV((i/2)-(j/2), j, -90D, 1.0D, 1.0D);
+		tessellator.addVertexWithUV((i/2)-(j/2), 0.0D, -90D, 1.0D, 0.0D);
+		tessellator.addVertexWithUV(0, 0.0D, -90D, 0.0D, 0.0D);
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((i/2)+(j/2), j, -90D, 0.0D, 1.0D);
+		tessellator.addVertexWithUV(i, j, -90D, 1.0D, 1.0D);
+		tessellator.addVertexWithUV(i, 0.0D, -90D, 1.0D, 0.0D);
+		tessellator.addVertexWithUV((i/2)+(j/2), 0.0D, -90D, 0.0D, 0.0D);
+		tessellator.draw();
+		GL11.glBindTexture(3553 /* GL_TEXTURE_2D */,
+				mc.renderEngine.getTexture("/terrain.png"));
+		tessellator.startDrawingQuads();
+		int l = Block.glass.getBlockTextureFromSide(0);
+		int i1 = (l & 0xf) << 4;
+	    int j1 = l & 0xf0;
+	    double d = (float)i1 / 256F;
+	    double d2 = ((float)i1 + 15.99F) / 256F;
+	    double d4 = (float)j1 / 256F;
+	    double d6 = ((float)j1 + 15.99F) / 256F;
+		tessellator.addVertexWithUV((i/2)-(j/2), j, -90D, d, d6);
+		tessellator.addVertexWithUV((i/2)+(j/2), j, -90D, d2, d6);
+		tessellator.addVertexWithUV((i/2)+(j/2), 0.0D, -90D, d2, d4);
+		tessellator.addVertexWithUV((i/2)-(j/2), 0.0D, -90D, d, d4);
+		tessellator.draw();
+		GL11.glDepthMask(true);
+		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
+		GL11.glEnable(3008 /* GL_ALPHA_TEST */);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	private static RenderItem itemRenderer = new RenderItem();

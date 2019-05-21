@@ -20,8 +20,6 @@ public class WorldGenMinable extends WorldGenerator {
 		if(numberOfBlocks == 1){
 			if (world.getBlockId(i, j, k) == Block.stone.blockID) {
 				world.setBlock(i, j, k, minableBlockId);
-				if(minableBlockId == NFC.FakeBedrock.blockID){
-				}
 			}
 		}else{
 		float f = random.nextFloat() * 3.141593F;

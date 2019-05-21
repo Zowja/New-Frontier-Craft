@@ -137,13 +137,13 @@ public class RenderBlocks
         if(l == 17)
         {
             return func_31080_c(block, i, j, k, true);
-        } else
+        }else
         {
             return false;
         }
     }
 
-    private boolean renderBlockBed(Block block, int i, int j, int k)
+	private boolean renderBlockBed(Block block, int i, int j, int k)
     {
         Tessellator tessellator = Tessellator.instance;
         int l = blockAccess.getBlockMetadata(i, j, k);
@@ -1384,6 +1384,10 @@ public class RenderBlocks
             tessellator.addVertexWithUV((float)i + f2, (float)(j + 0) - f1, (float)(k + 1) + f1, d, d3);
             tessellator.addVertexWithUV((float)i + f2, (float)(j + 0) - f1, (float)(k + 0) - f1, d1, d3);
             tessellator.addVertexWithUV((float)i + f2, (float)(j + 1) + f1, (float)(k + 0) - f1, d1, d2);
+            tessellator.addVertexWithUV((float)i + f2, (float)(j + 0) - f1, (float)(k + 1) - f1, d1, d3);
+            tessellator.addVertexWithUV((float)i + f2, (float)(j + 1) + f1, (float)(k + 1) - f1, d1, d2);
+            tessellator.addVertexWithUV((float)i + f2, (float)(j + 1) + f1, (float)(k + 0) + f1, d, d2);
+            tessellator.addVertexWithUV((float)i + f2, (float)(j + 0) - f1, (float)(k + 0) + f1, d, d3);
         }
         if(k1 == 4)
         {
@@ -1391,6 +1395,10 @@ public class RenderBlocks
             tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 1) + f1, (float)(k + 1) + f1, d1, d2);
             tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 1) + f1, (float)(k + 0) - f1, d, d2);
             tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 0) - f1, (float)(k + 0) - f1, d, d3);
+            tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 0) - f1, (float)(k + 0) + f1, d1, d3);
+            tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 1) + f1, (float)(k + 0) + f1, d1, d2);
+            tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 1) + f1, (float)(k + 1) - f1, d, d2);
+            tessellator.addVertexWithUV((float)(i + 1) - f2, (float)(j + 0) - f1, (float)(k + 1) - f1, d, d3);
         }
         if(k1 == 3)
         {
@@ -1398,6 +1406,10 @@ public class RenderBlocks
             tessellator.addVertexWithUV((float)(i + 1) + f1, (float)(j + 1) + f1, (float)k + f2, d1, d2);
             tessellator.addVertexWithUV((float)(i + 0) - f1, (float)(j + 1) + f1, (float)k + f2, d, d2);
             tessellator.addVertexWithUV((float)(i + 0) - f1, (float)(j + 0) - f1, (float)k + f2, d, d3);
+            tessellator.addVertexWithUV((float)(i + 0) + f1, (float)(j + 0) - f1, (float)k + f2, d1, d3);
+            tessellator.addVertexWithUV((float)(i + 0) + f1, (float)(j + 1) + f1, (float)k + f2, d1, d2);
+            tessellator.addVertexWithUV((float)(i + 1) - f1, (float)(j + 1) + f1, (float)k + f2, d, d2);
+            tessellator.addVertexWithUV((float)(i + 1) - f1, (float)(j + 0) - f1, (float)k + f2, d, d3);
         }
         if(k1 == 2)
         {
@@ -1405,6 +1417,10 @@ public class RenderBlocks
             tessellator.addVertexWithUV((float)(i + 1) + f1, (float)(j + 0) - f1, (float)(k + 1) - f2, d, d3);
             tessellator.addVertexWithUV((float)(i + 0) - f1, (float)(j + 0) - f1, (float)(k + 1) - f2, d1, d3);
             tessellator.addVertexWithUV((float)(i + 0) - f1, (float)(j + 1) + f1, (float)(k + 1) - f2, d1, d2);
+            tessellator.addVertexWithUV((float)(i + 0) + f1, (float)(j + 1) + f1, (float)(k + 1) - f2, d, d2);
+            tessellator.addVertexWithUV((float)(i + 0) + f1, (float)(j + 0) - f1, (float)(k + 1) - f2, d, d3);
+            tessellator.addVertexWithUV((float)(i + 1) - f1, (float)(j + 0) - f1, (float)(k + 1) - f2, d1, d3);
+            tessellator.addVertexWithUV((float)(i + 1) - f1, (float)(j + 1) + f1, (float)(k + 1) - f2, d1, d2);
         }
         return true;
     }
@@ -1956,6 +1972,13 @@ public class RenderBlocks
                 f25 = (field_22373_q + aoLightValueYNeg + field_22370_t + field_22371_s) / 4F;
                 f18 = (aoLightValueYNeg + field_22374_p + field_22371_s + field_22372_r) / 4F;
                 f11 = (field_22376_n + field_22377_m + aoLightValueYNeg + field_22374_p) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f4, temp2 = f25, temp3 = f18;
+                	f4 += ((f25 - f4)*((float)block.minX) + (f11 - f4)*(1-(float)block.maxZ));
+                	f25 += (temp1 - f25)*(1-(float)block.maxX) + (f18 - f25)*(1-(float)block.maxZ);
+                	f18 += ((f11 - f18)*(1-(float)block.maxX) + (temp2 - f18)*((float)block.minZ));
+                	f11 += ((temp3 - f11)*((float)block.minX) + (temp1 - f11)*((float)block.minZ));
+                }
             } else
             {
                 f4 = f11 = f18 = f25 = aoLightValueYNeg;
@@ -2024,6 +2047,13 @@ public class RenderBlocks
                 f5 = (field_22362_A + aoLightValueYPos + field_22360_B + field_22364_z) / 4F;
                 f12 = (aoLightValueYPos + field_22366_x + field_22364_z + field_22365_y) / 4F;
                 f19 = (field_22368_v + field_22369_u + aoLightValueYPos + field_22366_x) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f26, temp2 = f5, temp3 = f12;
+                	f26 += ((f5 - f26)*((float)block.minX) + (f19 - f26)*(1-(float)block.maxZ));
+                	f5 += (temp1 - f5)*(1-(float)block.maxX) + (f12 - f5)*(1-(float)block.maxZ);
+                	f12 += ((f19 - f12)*(1-(float)block.maxX) + (temp2 - f12)*((float)block.minZ));
+                	f19 += ((temp3 - f19)*((float)block.minX) + (temp1 - f19)*((float)block.minZ));
+                }
             } else
             {
                 f5 = f12 = f19 = f26 = aoLightValueYPos;
@@ -2092,6 +2122,13 @@ public class RenderBlocks
                 f13 = (aoLightValueZNeg + field_22366_x + field_22356_D + field_22365_y) / 4F;
                 f20 = (field_22374_p + aoLightValueZNeg + field_22372_r + field_22356_D) / 4F;
                 f27 = (field_22377_m + field_22358_C + field_22374_p + aoLightValueZNeg) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f6, temp2 = f13, temp3 = f20;
+                	f6 += ((f13 - f6)*((float)block.minX) + (f27 - f6)*(1-(float)block.maxY));
+                	f13 += (temp1 - f13)*(1-(float)block.maxX) + (f20 - f13)*(1-(float)block.maxY);
+                	f20 += ((f27 - f20)*(1-(float)block.maxX) + (temp2 - f20)*((float)block.minY));
+                	f27 += ((temp3 - f27)*((float)block.minX) + (temp1 - f27)*((float)block.minY));
+                }
             } else
             {
                 f6 = f13 = f20 = f27 = aoLightValueZNeg;
@@ -2177,6 +2214,13 @@ public class RenderBlocks
                 f28 = (aoLightValueZPos + field_22362_A + field_22353_F + field_22360_B) / 4F;
                 f21 = (field_22373_q + aoLightValueZPos + field_22370_t + field_22353_F) / 4F;
                 f14 = (field_22375_o + field_22354_E + field_22373_q + aoLightValueZPos) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f7, temp2 = f28, temp3 = f21;
+                	f7 += ((f28 - f7)*((float)block.minX) + (f14 - f7)*(1-(float)block.maxY));
+                	f28 += (temp1 - f28)*(1-(float)block.maxX) + (f21 - f28)*(1-(float)block.maxY);
+                	f21 += ((f14 - f21)*(1-(float)block.maxX) + (temp2 - f21)*((float)block.minY));
+                	f14 += ((temp3 - f14)*((float)block.minX) + (temp1 - f14)*((float)block.minY));
+                }
             } else
             {
                 f7 = f14 = f21 = f28 = aoLightValueZPos;
@@ -2262,6 +2306,13 @@ public class RenderBlocks
                 f8 = (aoLightValueXNeg + field_22354_E + field_22368_v + field_22367_w) / 4F;
                 f15 = (field_22358_C + aoLightValueXNeg + field_22369_u + field_22368_v) / 4F;
                 f22 = (field_22377_m + field_22376_n + field_22358_C + aoLightValueXNeg) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f29, temp2 = f8, temp3 = f15;
+                	f29 += ((f8 - f29)*((float)block.minY) + (f22 - f29)*(1-(float)block.maxZ));
+                	f8 += (temp1 - f8)*(1-(float)block.maxY) + (f15 - f8)*(1-(float)block.maxZ);
+                	f15 += ((f22 - f15)*(1-(float)block.maxY) + (temp2 - f15)*((float)block.minZ));
+                	f22 += ((temp3 - f22)*((float)block.minY) + (temp1 - f22)*((float)block.minZ));
+                }
             } else
             {
                 f8 = f15 = f22 = f29 = aoLightValueXNeg;
@@ -2347,6 +2398,13 @@ public class RenderBlocks
                 f30 = (aoLightValueXPos + field_22353_F + field_22364_z + field_22360_B) / 4F;
                 f23 = (field_22356_D + aoLightValueXPos + field_22365_y + field_22364_z) / 4F;
                 f16 = (field_22372_r + field_22371_s + field_22356_D + aoLightValueXPos) / 4F;
+                if(!block.renderAsNormalBlock()){
+                	float temp1 = f9, temp2 = f30, temp3 = f23;
+                	f9 += ((f30 - f9)*((float)block.minY) + (f16 - f9)*(1-(float)block.maxZ));
+                	f30 += (temp1 - f30)*(1-(float)block.maxY) + (f23 - f30)*(1-(float)block.maxZ);
+                	f23 += ((f16 - f23)*(1-(float)block.maxY) + (temp2 - f23)*((float)block.minZ));
+                	f16 += ((temp3 - f16)*((float)block.minY) + (temp1 - f16)*((float)block.minZ));
+                }
             } else
             {
                 f9 = f16 = f23 = f30 = aoLightValueXPos;
@@ -2694,15 +2752,22 @@ public class RenderBlocks
     {
         boolean flag = false;
         int l = blockAccess.getBlockMetadata(i, j, k);
-        if(l == 0)
+        if(l/4 == 0){
+        if(l%4 == 0)
         {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 1.0F);
             renderStandardBlock(block, i, j, k);
             block.setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderStandardBlock(block, i, j, k);
+            /* Newer
+             * block.setBlockBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 1.0F);
+            renderStandardBlock(block, i, j, k);
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+            renderStandardBlock(block, i, j, k);
+             */
             flag = true;
         } else
-        if(l == 1)
+        if(l%4 == 1)
         {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 1.0F);
             renderStandardBlock(block, i, j, k);
@@ -2710,7 +2775,7 @@ public class RenderBlocks
             renderStandardBlock(block, i, j, k);
             flag = true;
         } else
-        if(l == 2)
+        if(l%4 == 2)
         {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 0.5F);
             renderStandardBlock(block, i, j, k);
@@ -2718,7 +2783,7 @@ public class RenderBlocks
             renderStandardBlock(block, i, j, k);
             flag = true;
         } else
-        if(l == 3)
+        if(l%4 == 3)
         {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
             renderStandardBlock(block, i, j, k);
@@ -2727,6 +2792,42 @@ public class RenderBlocks
             flag = true;
         }
         block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        }
+        else {
+        	if(l%4 == 0)
+            {
+                block.setBlockBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                flag = true;
+            } else
+            if(l%4 == 1)
+            {
+                block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                flag = true;
+            } else
+            if(l%4 == 2)
+            {
+                block.setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F);
+                renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.5F, 1.0F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                flag = true;
+            } else
+            if(l%4 == 3)
+            {
+                block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+                renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F);
+                renderStandardBlock(block, i, j, k);
+                flag = true;
+            }
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        }
         return flag;
     }
 

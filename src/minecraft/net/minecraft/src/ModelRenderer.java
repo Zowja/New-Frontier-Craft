@@ -97,8 +97,8 @@ public class ModelRenderer {
 				+ k, textureOffsetY + 0, textureOffsetX + k + i, textureOffsetY
 				+ k, scalex, scaley);
 		faces[3] = new TexturedQuad(new PositionTextureVertex[] {
-				positiontexturevertex2, positiontexturevertex3,
-				positiontexturevertex7, positiontexturevertex6 },
+				positiontexturevertex7, positiontexturevertex6,
+				positiontexturevertex2, positiontexturevertex3 },
 				textureOffsetX + k + i, textureOffsetY + 0, textureOffsetX + k
 						+ i + i, textureOffsetY + k, scalex, scaley);
 		faces[4] = new TexturedQuad(new PositionTextureVertex[] {

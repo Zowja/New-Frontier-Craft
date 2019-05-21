@@ -124,7 +124,7 @@ label0:
                 int k4 = 0;
                 do
                 {
-                    if(k4 >= 10)
+                    if(k4 >= 12)
                     {
                         break label0;
                     }
@@ -147,7 +147,7 @@ label0:
 
     private ItemStack pickCheckLootItem(Random random)
     {
-    	int i = random.nextInt(14);
+    	int i = random.nextInt(16);
 		if (i == 0) {
 			return new ItemStack(Item.saddle);
 		}
@@ -197,9 +197,11 @@ label0:
 		if (i == 13) {
 			return new ItemStack(Item.swordSteel, 1, random.nextInt(160) + 80);
 		}
-		else {
-			return null;
+		if(i > 13){
+			return new ItemStack(Item.bone, random.nextInt(3) + 1);
 		}
+		
+		return null;
     }
 
     private String pickMobSpawner(Random random)

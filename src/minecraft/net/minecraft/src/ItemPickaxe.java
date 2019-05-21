@@ -84,7 +84,7 @@ public class ItemPickaxe extends ItemTool {
 			return toolMaterial.getHarvestLevel() >= 3;
 		}
 
-		if (block.blockMaterial == Material.rock) {
+		if (block.blockMaterial == Material.rock || block.blockMaterial == Material.ice) {
 			return true;
 		}
 		return block.blockMaterial == Material.iron;

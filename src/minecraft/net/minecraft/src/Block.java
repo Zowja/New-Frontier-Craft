@@ -793,10 +793,10 @@ public class Block {
 		blockSteel = (new BlockOreStorage(42, 22)).setHardness(3F)
 				.setResistance(40F).setStepSound(soundMetalFootstep)
 				.setBlockName("Iron Block");
-		stairDouble = (new BlockStep(43, true)).setHardness(2.0F)
+		stairDouble = (new BlockDoubleStep(43)).setHardness(2.0F)
 				.setResistance(10F).setStepSound(soundStoneFootstep)
 				.setBlockName("Stone Slab");
-		stairSingle = (new BlockStep(44, false)).setHardness(2.0F)
+		stairSingle = (new BlockStepUD(44)).setHardness(1.2F)
 				.setResistance(10F).setStepSound(soundStoneFootstep)
 				.setBlockName("Stone Slab");
 		brick = (new Block(45, 7, Material.rock)).setHardness(4.0F)
@@ -966,6 +966,8 @@ public class Block {
 				.setItemName("Glass");
 		Item.itemsList[wood.blockID] = (new ItemLog(wood.blockID - 256))
 				.setItemName("Wood");
+		Item.itemsList[ice.blockID] = (new ItemIce(ice.blockID - 256))
+				.setItemName("Ice");
 		Item.itemsList[stairSingle.blockID] = (new ItemSlab(
 				stairSingle.blockID - 256)).setItemName("Stone Slab");
 		Item.itemsList[sapling.blockID] = (new ItemSapling(
@@ -976,6 +978,8 @@ public class Block {
 				pistonBase.blockID - 256);
 		Item.itemsList[pistonStickyBase.blockID] = new ItemPiston(
 				pistonStickyBase.blockID - 256);
+		Item.itemsList[ladder.blockID] = (new ItemLadder(ladder.blockID - 256))
+				.setItemName("Ladder");
 
 		canBlockGrass[0] = true;
 		StatList.func_25154_a();

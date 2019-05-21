@@ -24,7 +24,7 @@ public class ItemSlab extends ItemBlock {
 	}
 
 	public String getItemNameIS(ItemStack itemstack) {
-		return (new StringBuilder()).append(BlockStep.field_22037_a[itemstack.getItemDamage()]).append(" ")
+		return (new StringBuilder()).append(BlockStepUD.field_22037_a[itemstack.getItemDamage()]).append(" ")
 				.append("Slab")
 				.toString();
 	}

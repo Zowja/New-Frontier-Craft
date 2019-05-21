@@ -6,12 +6,15 @@ package net.minecraft.client;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Proxy;
+import java.net.URL;
 import java.util.UUID;
 
 import net.minecraft.src.*;
 
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.*;
 import org.lwjgl.opengl.*;
@@ -122,8 +125,18 @@ public abstract class Minecraft implements Runnable {
 		saveLoader = new SaveConverterMcRegion(new File(mcDataDir, "NFCsaves"));
 		gameSettings = new GameSettings(this, mcDataDir);
 		texturePackList = new TexturePackList(this, mcDataDir);
+		File structures = new File(mcDataDir, "/structurepacks/");
+		if(!structures.exists()){
+			structures.mkdirs();
+			URL defaultStructures = getClass().getResource("DefaultNFCStructures.zip");
+			try {
+				FileUtils.copyURLToFile(defaultStructures, new File(structures, "DefaultNFCStructures.zip"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		renderEngine = new RenderEngine(texturePackList, gameSettings);
-		fontRenderer = new FontRenderer(gameSettings, "/font/default.png",
+		fontRenderer = new FontRenderer(gameSettings, texturePackList.selectedTexturePack,
 				renderEngine);
 		ColorizerWater.func_28182_a(renderEngine
 				.func_28149_a("/misc/watercolor.png"));
@@ -1082,6 +1095,7 @@ public abstract class Minecraft implements Runnable {
 		changeWorld1(null);
 		System.gc();
 		if (saveLoader.isOldMapFormat(s)) {
+			//TODO: USE DIS
 			convertMapFormat(s, s1);
 		} else {
 			net.minecraft.src.ISaveHandler isavehandler = saveLoader

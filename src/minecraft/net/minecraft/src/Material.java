@@ -114,6 +114,7 @@ public class Material {
 	public static final Material cakeMaterial;
 	public static final Material field_31068_A;
 	public static final Material field_31067_B;
+	public static final Material slab;
 	private boolean canBurn;
 	private boolean groundCover;
 	private boolean isOpaque;
@@ -143,7 +144,7 @@ public class Material {
 		tnt = (new Material(MapColor.tntColor)).setBurning().setIsTranslucent();
 		field_4262_q = (new Material(MapColor.foliageColor))
 				.setNoPushMobility();
-		ice = (new Material(MapColor.iceColor)).setIsTranslucent();
+		ice = (new Material(MapColor.iceColor)).setIsTranslucent().setNoHarvest();
 		snow = (new MaterialLogic(MapColor.snowColor)).setIsGroundCover()
 				.setIsTranslucent().setNoHarvest().setNoPushMobility();
 		builtSnow = (new Material(MapColor.snowColor)).setNoHarvest();
@@ -157,5 +158,6 @@ public class Material {
 				.setNoPushMobility();
 		field_31067_B = (new Material(MapColor.stoneColor))
 				.setImmovableMobility();
+		slab = (new Material(MapColor.stoneColor));
 	}
 }

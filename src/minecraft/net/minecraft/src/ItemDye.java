@@ -103,7 +103,7 @@ public class ItemDye extends Item {
 
 	public static final String dyeColors[] = { "Ink Sack", "Rose Red", "Cactus Green",
 			"Cocoa Beans", "Lapis Lazuli", "Purple Dye", "Cyan Dye", "Light Gray Dye", "Gray Dye", "Pink Dye",
-			"Lime Dye", "Danilion Yellow", "Light Blue Dye", "Magenta Dye", "Orange Dye", "Bonemeal" };
+			"Lime Dye", "Dandelion Yellow", "Light Blue Dye", "Magenta Dye", "Orange Dye", "Bonemeal" };
 	public static final int field_31002_bk[] = { 0x1e1b1b, 0xb3312c, 0x3b511a,
 			0x51301a, 0x253192, 0x7b2fbe, 0x287697, 0x287697, 0x434343,
 			0xd88198, 0x41cd34, 0xdecf2a, 0x6689d3, 0xc354cd, 0xeb8844,

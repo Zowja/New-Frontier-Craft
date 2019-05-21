@@ -142,7 +142,7 @@ public class Explosion {
 				explosionX,
 				explosionY,
 				explosionZ,
-				"random.old_explode",
+				"random.explode",
 				4F,
 				(1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
 		ArrayList arraylist = new ArrayList();
