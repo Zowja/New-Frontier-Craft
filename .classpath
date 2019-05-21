@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="conf/patches"/>
+	<classpathentry kind="src" path="src/minecraft"/>
+	<classpathentry kind="lib" path="jars/bin/jinput.jar"/>
+	<classpathentry kind="lib" path="jars/bin/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="jars/bin/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Java/Decompiles/NFC/jars/bin/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="jars/bin/minecraft.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.0-beta9.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.0-beta9.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.0.10.Final.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.0.23.Final.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/exceptor.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/jadretro.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/retroguard.jar"/>
+	<classpathentry kind="lib" path="temp/minecraft_exc.jar"/>
+	<classpathentry kind="lib" path="temp/minecraft_rg.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Java/Decompiles/NFC/lib/authlib-1.5.25.jar"/>
+	<classpathentry kind="output" path="bin/minecraft"/>
+</classpath>
